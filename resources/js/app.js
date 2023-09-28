@@ -33,7 +33,7 @@ if (resetPasswordForm) {
 
         try {
             const response = await axios.post('/api/auth/reset-password', formData);
-            showMessage('success', response.data.data.message, messageContainer);
+            showMessage('success', response.data.message, messageContainer);
             // Optionally, you can redirect or perform other actions here
         } catch (error) {
             showMessage('error', 'An error occurred. Please try again.', messageContainer);
@@ -62,10 +62,10 @@ if (final_registration) {
                 addSuccess.innerHTML = "<div><p>Enter the dashboard page !</p></div>";
                 console.log('dashboard');
 
-                showMessage('success', response.data.data.message, messageContainer);
+                showMessage('success', response.data.message, messageContainer);
                 // Optionally, you can redirect or perform other actions here
                 }else{
-                    showMessage('error', response.data.data.message, messageContainer);
+                    showMessage('error', response.data.message, messageContainer);
                 }
         } catch (error) {
             showMessage('error', 'An error occurred. Please try again.', messageContainer);
@@ -142,14 +142,14 @@ if (authform) {
 
             }else{
     
-                showMessage('error', response.data.data.message, messageContainer);
+                showMessage('error', response.data.message, messageContainer);
             }
 
             // Optionally, you can redirect or perform other actions here
         } catch (error) {
             console.log("error", error);
             if( error.response.data.data != null ||  error.response.data.data != undefined ){
-                var message = error.response.data.data.message;
+                var message = error.response.data.message;
             }else{
                 var message = error.response.data.message;
             }
@@ -182,14 +182,14 @@ if(resendOtp_class){
                 // toggleModal();
                 console.log("sent otp");
             }else{
-                showMessage('error', response.data.data.message, messageContainer_sendotp);
+                showMessage('error', response.data.message, messageContainer_sendotp);
             }
 
             // Optionally, you can redirect or perform other actions here
         } catch (error) {
             console.log("error", error);
             if( error.response.data.data != null ||  error.response.data.data != undefined ){
-                var message = error.response.data.data.message;
+                var message = error.response.data.message;
             }else{
                 var message = error.response.data.message;
             }
@@ -238,7 +238,7 @@ if (authform_popup) {
                     toggleModal();
                 }
             }else{
-                showMessage('error', response.data.data.message, messageContainer_sendotp);
+                showMessage('error', response.data.message, messageContainer_sendotp);
             }
 
             // Optionally, you can redirect or perform other actions here
@@ -246,7 +246,7 @@ if (authform_popup) {
    
             console.log("error", error);
             if( error.response.data.data != null ||  error.response.data.data != undefined ){
-                var message = error.response.data.data.message;
+                var message = error.response.data.message;
             }else{
                 var message = error.response.data.message;
             }

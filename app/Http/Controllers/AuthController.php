@@ -60,7 +60,8 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'failed',
-                'data' => array("message"=>$validator->errors()->first()),
+                'data' => [],
+                "message"=>$validator->errors()->first(),
                 'code' => 400
             ],400);
         }
@@ -92,7 +93,8 @@ class AuthController extends Controller
                 }
                 return response()->json([
                     'status' => 'success',
-                    'data' => array("message"=>"code sent successfully."),
+                    'data' => [],
+                    "message"=>"code sent successfully.",
                     'is_registered' => $isregsitered,
                     'code' => 200
                 ],200);
@@ -104,14 +106,16 @@ class AuthController extends Controller
                     $this->twilioSendOtp($request);
                     return response()->json([
                         'status' => 'success',
-                        'data' => array("message"=>"code sent successfully."),
+                        'data' => [],
+                        "message"=>"code sent successfully.",
                         'code' => 200
                     ],200);
                 }else {
    
                     return response()->json([
                         'status' => 'failed',
-                        'data' => array("message"=>"Invalid phone number!"),
+                        'data' => [],
+                        "message"=>"Invalid phone number!",
                         'code' => 400
                     ],400);
                 }
@@ -120,7 +124,8 @@ class AuthController extends Controller
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'failed',
-                'data' => array("message" => $e->getMessage()),
+                'data' => [],
+                "message" => $e->getMessage(),
                 'code' => 400
             ]);
         }
@@ -158,7 +163,8 @@ class AuthController extends Controller
         if(!empty($user->email)){
             return response()->json([
                 'status' => 'failed',
-                'data' => array('message'=>"Already registered"),
+                'data' => [],
+                'message'=>"Already registered",
                 'is_registered' => true,
                 'code' => 200
             ],200);
@@ -184,10 +190,9 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => array(
-                "message"=>'Registration successful also verifiction mail sent to your email address to verify email address.',
-                'accessToken'=> $token
-            ),
+            'data' => [],
+            "message"=>'Registration successful also verifiction mail sent to your email address to verify email address.',
+            'accessToken'=> $token,
             'code' => 200
         ],200);
 
@@ -203,7 +208,8 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'failed',
-                'data' => array("message" => $validator->errors()->first()),
+                'data' => [],
+                "message" => $validator->errors()->first(),
                 'code' => 400
             ],400);
         }
@@ -234,14 +240,17 @@ class AuthController extends Controller
                     /* Authenticate user */
                     return response()->json([
                         'status' => 'success',
-                        'data' => array('message'=>"phone number verified", 'accessToken'=> $token),
+                        'data' => [],
+                        'message'=>"phone number verified",
+                        'accessToken'=> $token,
                         'is_registered' => false,
                         'code' => 200
                     ],200);
                 }else{
                     return response()->json([
                         'status' => 'success',
-                        'data' => array('message'=>"phone number not verified"),
+                        'data' => [],
+                        'message'=>"phone number not verified",
                         'is_registered' => false,
                         'code' => 200
                     ],200);
@@ -250,7 +259,8 @@ class AuthController extends Controller
             }else{
                 return response()->json([
                     'status' => 'failed',
-                    'data' => array('message'=>"Invalid otp"),
+                    'data' => [],
+                    'message'=>"Invalid otp",
                     'code' => 200
                 ],200);
             }
@@ -258,7 +268,8 @@ class AuthController extends Controller
             // Handle exceptions
             return response()->json([
                 'status' => 'failed',
-                'data' => array('message'=> $e->getMessage()),
+                'data' => [],
+                'message'=> $e->getMessage(),
                 'code' => 400
             ],400);
         }
@@ -275,14 +286,16 @@ class AuthController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'data' => array('message'=> "Token Verified"),
+                'data' => [],
+                'message'=> "Token Verified",
                 'code' => 200
             ],200);
         } else {
             // Handle exceptions
             return response()->json([
                 'status' => 'failed',
-                'data' => array('message'=> "Expired or Wrong Token"),
+                'data' => [],
+                'message'=> "Expired or Wrong Token",
                 'code' => 200
             ],200);
         }
@@ -319,14 +332,16 @@ class AuthController extends Controller
 
                 return response()->json([
                     'status' => 'success',
-                    'data' => array('message'=> "Verifiction mail sent to your email address."),
+                    'data' => [],
+                    'message'=> "Verifiction mail sent to your email address.",
                     'code' => 200
                 ],200);
             }
 
             return response()->json([
                 'status' => 'failed',
-                'data' => array('message'=> "User not found"),
+                'data' => [],
+                'message'=> "User not found",
                 'code' => 200
             ],200);
         }
@@ -380,7 +395,8 @@ class AuthController extends Controller
         if ($status == Password::PASSWORD_RESET) {
             return response()->json([
                 'status' => 'success',
-                'data' => array('message'=> "Password reset successful"),
+                'data' => [],
+                'message'=> "Password reset successful",
                 'code' => 200
             ],200);
         } else {
@@ -393,7 +409,8 @@ class AuthController extends Controller
         // redirect them back to where they came from with their error message.
         return response()->json([
             'status' => 'success',
-            'data' => array('message'=> $status),
+            'data' => [],
+            'message'=> $status,
             'code' => 200
         ],200);
     }
@@ -415,7 +432,8 @@ class AuthController extends Controller
             if ($validator->fails()) {
                 return response()->json([
                     'status' => 'failed',
-                    'data' => array("message" => $validator->errors()->first()),
+                    'data' => [],
+                    "message" => $validator->errors()->first(),
                     'code' => 400
                 ],400);
             }
@@ -428,13 +446,15 @@ class AuthController extends Controller
             if($user_updated){
                 return response()->json([
                     'status' => 'success',
-                    'data' => array("message" => "Password Updated"),
+                    'data' => [],
+                    "message" => "Password Updated",
                     'code' => 200
                 ],200);
             }else{
                 return response()->json([
                     'status' => 'success',
-                    'data' => array("message" => "Password updating have some issue"),
+                    'data' => [],
+                    "message" => "Password updating have some issue",
                     'code' => 401
                 ],401);
             }
@@ -442,7 +462,8 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => array('message'=> "Something wrong"),
+            'data' => [],
+            'message'=> "Something wrong",
             'code' => 401
         ],401);
 
@@ -464,7 +485,8 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'failed',
-                'data' => array("message" => $validator->errors()->first()),
+                'data' => [],
+                "message" => $validator->errors()->first(),
                 'code' => 400
             ],400);
         }
@@ -472,7 +494,8 @@ class AuthController extends Controller
         if (!(Hash::check($request->old_password, Auth::user()->password))){
             return response()->json([
                 'status' => 'error',
-                'data' => array('message'=> "Your current password does not matches with the old password."),
+                'data' => [],
+                'message'=> "Your current password does not matches with the old password.",
                 'code' => 401
             ]);
         }
@@ -480,7 +503,8 @@ class AuthController extends Controller
         if(strcmp($request->old_password, $request->password) == 0){
             return response()->json([
                 'status' => 'error',
-                'data' => array('message'=> "New Password cannot be same as your current password."),
+                'data' => [],
+                'message'=> "New Password cannot be same as your current password.",
                 'code' => 401
             ]);
         }
@@ -492,13 +516,15 @@ class AuthController extends Controller
         if($user_updated){
             return response()->json([
                 'status' => 'success',
-                'data' => array("message" => "Password successfully changed!"),
+                'data' => [],
+                "message" => "Password successfully changed!",
                 'code' => 200
             ]);
         }else{
             return response()->json([
                 'status' => 'error',
-                'data' => array("message" => "Password updating have some issue"),
+                'data' => [],
+                "message" => "Password updating have some issue",
                 'code' => 401
             ]);
         }
@@ -517,9 +543,8 @@ class AuthController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => array(
-                'message'=>'Successfully logged out'
-            ),
+            'data' => [],
+            'message'=>'Successfully logged out',
             'code' => 200
         ]);
 
