@@ -76,15 +76,19 @@ class AuthController extends Controller
                 }else{
                     $isregsitered = false;
                 }
-                $this->twilioSendOtp($request);
+               // $this->twilioSendOtp($request);
     
                 if(isset($request->first_name) && isset($request->last_name)  && isset($request->phone)){
-                    $user = User::updateOrCreate(
-                        ['phone' => $request->phone,
-                        'first_name' => $request->first_name,
-                        'last_name' => $request->last_name,
-                     ],[] 
-                    );
+                    $phone_num_exist = User::where('phone', $request->phone)->first();
+                    if(empty($phone_num_exist)){
+                        $user = User::updateOrCreate(
+                            ['phone' => $request->phone,
+                            'first_name' => $request->first_name,
+                            'last_name' => $request->last_name,
+                         ],[] 
+                        );
+                    }
+
                 }else {
                     $user = User::updateOrCreate(
                         ['phone' => $request->phone,
